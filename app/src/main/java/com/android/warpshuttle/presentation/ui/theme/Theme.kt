@@ -1,4 +1,4 @@
-package com.android.warpshuttle.ui.theme
+package com.android.warpshuttle.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

@@ -1,4 +1,4 @@
-package com.android.warpshuttle.ui.theme
+package com.android.warpshuttle.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
