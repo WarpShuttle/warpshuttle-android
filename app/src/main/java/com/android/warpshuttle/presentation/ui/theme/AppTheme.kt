@@ -1,0 +1,127 @@
+package com.android.warpshuttle.presentation.ui.theme
+
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Colors
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+
+private val DarkColorPalette = darkColors(
+    primary = Purple200,
+    primaryVariant = Purple700,
+    secondary = Teal200
+)
+
+private val LightColorPalette = lightColors(
+    primary = Purple500,
+    primaryVariant = Purple700,
+    secondary = Teal200
+
+    /* Other default colors to override
+    background = Color.White,
+    surface = Color.White,
+    onPrimary = Color.White,
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = Color.Black,
+    */
+)
+
+private val LocalAppTypography = staticCompositionLocalOf { textSmallDimension }
+
+object AppTheme {
+    val colors: AppColors
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalColors.current
+
+    val materialColors: Colors
+        @Composable
+        @ReadOnlyComposable
+        get() = MaterialTheme.colors
+
+    val typography: AppTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalAppTypography.current
+
+    val dimens: Dimensions
+        @Composable
+        get() = LocalAppDimens.current
+
+}
+
+@Composable
+fun AppTheme(
+    colors: AppColors = AppTheme.colors,
+    typography: AppTypography = AppTheme.typography,
+    content: @Composable () -> Unit
+) {
+    // Explicitly creating a new object here so we don't mutate the initial [colors]
+    // provided, and overwrite the values set in it.
+    val rememberedColors = remember { colors.copy() }.apply { updateColorsFrom(colors) }
+    CompositionLocalProvider(
+        LocalColors provides rememberedColors,
+        LocalAppTypography provides typography
+    ) {
+        content()
+    }
+}
+
+@Composable
+fun AnimatedSplashScreenTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val configuration = LocalConfiguration.current
+
+    val typography =
+        if (configuration.screenWidthDp <= 320) textSmallDimension else textSw420Dimensions
+    val dimensions = if (configuration.screenWidthDp <= 320) smallDimension else sw420Dimension
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setSystemBarsColor(
+        color = Color.Black.copy(alpha = 0.2f)
+    )
+
+    val colors = if (darkTheme) {
+        LightColorPalette
+    } else {
+        LightColorPalette
+    }
+
+
+    ProvideDimens(dimensions = dimensions) {
+        ProvideAppTypography(typography = typography) {
+            MaterialTheme(
+                colors = colors,
+                typography = androidx.compose.material.Typography(),
+                content = content
+            )
+        }
+    }
+}
+
+@Composable
+fun ProvideDimens(dimensions: Dimensions, content: @Composable () -> Unit) {
+    val dimensionSet = remember { dimensions }
+    CompositionLocalProvider(LocalAppDimens provides dimensionSet, content = content)
+}
+
+private val LocalAppDimens = staticCompositionLocalOf { smallDimension }
+
+@Composable
+fun ProvideAppTypography(typography: AppTypography, content: @Composable () -> Unit) {
+    val typographySet = remember { typography }
+    CompositionLocalProvider(LocalAppTypography provides typographySet, content = content)
+}
+
+
+

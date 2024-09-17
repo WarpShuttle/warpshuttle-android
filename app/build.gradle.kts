@@ -59,9 +59,19 @@ dependencies {
 
     implementation(libs.androidx.core.splash.screen)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
+    implementation(libs.material)
+    implementation(libs.androidx.material)
     implementation(libs.androidx.constraintlayout)
+
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.navigation.material)
+    implementation(libs.accompanist.navigation.animation)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.dynamic.features)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
