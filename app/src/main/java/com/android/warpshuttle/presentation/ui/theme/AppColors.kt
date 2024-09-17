@@ -26,6 +26,7 @@ class AppColors(
     private var isLight by mutableStateOf(isLight)
 
     val colorPalatinateBlue = Color(0xFF1835F5)
+    val colorBlack = Color(0xFF000000)
 
     fun copy(
         primary: Color = this.primary,

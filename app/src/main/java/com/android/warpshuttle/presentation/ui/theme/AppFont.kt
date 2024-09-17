@@ -9,3 +9,10 @@ val TTCommonFonts = FontFamily(
     Font(R.font.ttcommonregular, weight = FontWeight.Normal),
     Font(R.font.ttcommonbold, weight = FontWeight.Bold)
 )
+
+val PoppinsFont = FontFamily(
+    Font(R.font.poppinsregular, weight = FontWeight.Normal),
+    Font(R.font.poppinsmedium, weight = FontWeight.Medium),
+    Font(R.font.poppinsbold, weight = FontWeight.Bold),
+
+)
