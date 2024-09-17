@@ -15,15 +15,15 @@ import androidx.compose.ui.platform.LocalConfiguration
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = ColorPalatinateBlue,
+    primaryVariant = ColorPalatinateBlue,
+    secondary = ColorPalatinateBlue
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = ColorPalatinateBlue,
+    primaryVariant = ColorPalatinateBlue,
+    secondary = ColorPalatinateBlue
 
     /* Other default colors to override
     background = Color.White,
@@ -57,23 +57,6 @@ object AppTheme {
         @Composable
         get() = LocalAppDimens.current
 
-}
-
-@Composable
-fun AppTheme(
-    colors: AppColors = AppTheme.colors,
-    typography: AppTypography = AppTheme.typography,
-    content: @Composable () -> Unit
-) {
-    // Explicitly creating a new object here so we don't mutate the initial [colors]
-    // provided, and overwrite the values set in it.
-    val rememberedColors = remember { colors.copy() }.apply { updateColorsFrom(colors) }
-    CompositionLocalProvider(
-        LocalColors provides rememberedColors,
-        LocalAppTypography provides typography
-    ) {
-        content()
-    }
 }
 
 @Composable
