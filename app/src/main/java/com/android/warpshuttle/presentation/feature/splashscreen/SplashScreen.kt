@@ -30,12 +30,12 @@ fun SplashScreen(onSplashEnd : () -> Unit){
         scale.animateTo(
             targetValue = 1f,
             animationSpec = tween(
-                durationMillis = 1000,
+                durationMillis = 2500,
                 easing = {
                     OvershootInterpolator(4f).getInterpolation(it)
                 })
         )
-        delay(2000L)
+        delay(500L)
         onSplashEnd()
     }
 
