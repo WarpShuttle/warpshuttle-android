@@ -1,12 +1,10 @@
 package com.android.warpshuttle.presentation.feature.intro.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRowScopeInstance.align
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,10 +19,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,13 +35,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.warpshuttle.R
+import com.android.warpshuttle.presentation.ui.component.WarpButton
 import com.android.warpshuttle.presentation.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 
@@ -115,14 +109,16 @@ fun IntroScreen() {
             totalDots = greetings.size,
             selectedIndex = pagerState.currentPage,
             selectedColor = AppTheme.colors.colorDeepBlue,
-            unSelectedColor = AppTheme.colors.colorShadowGrey,
+            unSelectedColor = AppTheme.colors.colorGray,
         )
 
         Spacer(modifier = Modifier.height(64.dp))
 
-        OrangeButton(
+        WarpButton(
             title = buttonName,
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp)
+            modifier = Modifier
+                .padding(start = 24.dp, end = 24.dp)
+                .width(175.dp)
         ) {
             if (pagerState.currentPage == 0 || pagerState.currentPage < 3) {
                 scope.launch {
@@ -164,6 +160,7 @@ fun ItemGreeting(item: Triple<Int, String, String>) {
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
+            .fillMaxWidth()
             .fillMaxHeight()
             .padding(start = 24.dp, end = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -184,7 +181,6 @@ fun ItemGreeting(item: Triple<Int, String, String>) {
             text = item.second,
             fontSize = 24.sp,
             color = AppTheme.colors.colorBlack
-
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -193,38 +189,10 @@ fun ItemGreeting(item: Triple<Int, String, String>) {
             text = item.third,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-            color =  AppTheme.colors.colorShadowGrey
-        )
-
-
-    }
-
-}
-
-@Composable
-fun OrangeButton(
-    title: String,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-
-    Button(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp),
-        shape = RoundedCornerShape(12),
-        colors = ButtonDefaults.textButtonColors(AppTheme.colors.colorBrightBlue),
-        onClick = {
-            onClick()
-        }) {
-        Text(
-            text = title,
-            fontSize = 16.sp,
-            color = colorResource(id = R.color.white)
+            color = AppTheme.colors.colorShadowGrey
         )
     }
 }
-
 
 @Composable
 fun DotsIndicator(
@@ -245,21 +213,21 @@ fun DotsIndicator(
             if (index == selectedIndex) {
                 Box(
                     modifier = Modifier
-                        .size(10.dp)
-                        .clip(CircleShape)
+                        .size(width = 20.dp, height = 8.dp)
+                        .clip(RoundedCornerShape(10.dp))
                         .background(selectedColor)
                 )
             } else {
                 Box(
                     modifier = Modifier
-                        .size(10.dp)
-                        .clip(CircleShape)
+                        .size(width = 12.dp, height = 8.dp)
+                        .clip(RoundedCornerShape(10.dp))
                         .background(unSelectedColor)
                 )
             }
 
             if (index != totalDots - 1) {
-                Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+                Spacer(modifier = Modifier.padding(horizontal = 5.dp))
             }
         }
     }
