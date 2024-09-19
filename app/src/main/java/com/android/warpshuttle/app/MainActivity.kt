@@ -44,12 +44,14 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-            customAnimatedComposable(route = Screen.Intro.route){
-                IntroScreen ()
+            customAnimatedComposable(route = Screen.Intro.route) {
+                IntroScreen {
+                    Log.i("WarpShuttle", "LoginScreen")
+                }
             }
-            customAnimatedComposable(route = Screen.Login.route){
-                LoginScreen{
-                    Log.i("WarpShuttle","LoginScreen")
+            customAnimatedComposable(route = Screen.Login.route) {
+                LoginScreen {
+                    Log.i("WarpShuttle", "LoginScreen")
                 }
             }
         }

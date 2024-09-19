@@ -45,7 +45,7 @@ import com.android.warpshuttle.presentation.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun IntroScreen() {
+fun IntroScreen(getStartedClicked: () -> Unit) {
     val greetings = listOf(
         Triple(
             R.drawable.ic_warpshuttle,
@@ -128,6 +128,7 @@ fun IntroScreen() {
                 }
             } else {
                 //start app
+                getStartedClicked()
             }
         }
 
