@@ -12,6 +12,7 @@ import com.android.warpshuttle.navigation.Screen
 import com.android.warpshuttle.navigation.customAnimatedComposable
 import com.android.warpshuttle.navigation.rememberCustomAnimatedNavController
 import com.android.warpshuttle.presentation.feature.authentication.screen.LoginScreen
+import com.android.warpshuttle.presentation.feature.intro.screen.IntroScreen
 import com.android.warpshuttle.presentation.feature.splashscreen.SplashScreen
 import com.android.warpshuttle.presentation.ui.theme.AnimatedSplashScreenTheme
 
@@ -38,10 +39,13 @@ class MainActivity : ComponentActivity() {
             customAnimatedComposable(route = Screen.Splash.route) {
                 SplashScreen {
                     navController.navigator(
-                        Screen.Login.route,
+                        Screen.Intro.route,
                         clearBackStack = true
                     )
                 }
+            }
+            customAnimatedComposable(route = Screen.Intro.route){
+                IntroScreen ()
             }
             customAnimatedComposable(route = Screen.Login.route){
                 LoginScreen{

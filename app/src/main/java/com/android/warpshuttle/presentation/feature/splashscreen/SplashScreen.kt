@@ -41,7 +41,7 @@ fun SplashScreen(onSplashEnd : () -> Unit){
 
     // Image
     Box(contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize().background(AppTheme.colors.colorPalatinateBlue)) {
+        modifier = Modifier.fillMaxSize().background(AppTheme.colors.colorBrightBlue)) {
         Image(painter = painterResource(id = R.drawable.ic_warpshuttle),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value).size(height = 100.dp, width = 100.dp))

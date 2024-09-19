@@ -25,7 +25,10 @@ class AppColors(
     private var onSurface by mutableStateOf(onSurface)
     private var isLight by mutableStateOf(isLight)
 
-    val colorPalatinateBlue = Color(0xFF1835F5)
+    val colorBrightBlue = Color(0xFF2222FB)
+    val colorDeepBlue = Color(0xFF2203B1)
+    val colorShadowGrey = Color(0xFF191919)
+    val colorWhite = Color(0xFFFFFFFF)
     val colorBlack = Color(0xFF000000)
 
     fun copy(
@@ -61,17 +64,20 @@ class AppColors(
 
 val ColorWhite = Color(0xFFFFFFFF)
 val ColorBlack = Color(0xFF000000)
-val ColorPalatinateBlue = Color(0xFF1835F5)
 
-private val colorLightPrimary = ColorPalatinateBlue
-private val colorLightSecondary = ColorPalatinateBlue
+val ColorBrightBlue = Color(0xFF2222FB)
+val ColorDeepBlue = Color(0xFF2203B1)
+val ColorShadowGrey = Color(0xFF191919)
+
+private val colorLightPrimary = ColorBrightBlue
+private val colorLightSecondary = ColorDeepBlue
 private val colorLightTextPrimary = Color(0xFF000000)
 private val colorLightTextSecondary = Color(0xFF6C727A)
 private val colorLightBackground = Color(0xFFFFFFFF)
 private val colorLightError = Color(0xFFD62222)
 
-private val colorDarkPrimary = ColorPalatinateBlue
-private val colorDarkSecondary = ColorPalatinateBlue
+private val colorDarkPrimary = ColorBrightBlue
+private val colorDarkSecondary = ColorDeepBlue
 private val colorDarkTextPrimary = Color(0xFFFAFAFA)
 private val colorDarkTextSecondary = Color(0xFF6C727A)
 private val colorDarkBackground = Color(0xFF090A0A)
