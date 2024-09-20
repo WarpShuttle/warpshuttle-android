@@ -45,11 +45,11 @@ import com.android.warpshuttle.presentation.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun IntroScreen(getStartedClicked: () -> Unit) {
+fun IntroScreen(getStartedClicked: () -> Unit, onSkipClicked: () -> Unit) {
     val greetings = listOf(
         Triple(
             R.drawable.ic_warpshuttle,
-            "Welcome to Warp Shuttle!",
+            "Welcome to\nWarp Shuttle!",
             "Get all your loved foods in one once place"
         ),
         Triple(
@@ -141,16 +141,13 @@ fun IntroScreen(getStartedClicked: () -> Unit) {
                     .height(48.dp)
                     .padding(horizontal = 12.dp, vertical = 12.dp)
                     .clickable {
-//                        navController?.navigate(Screen.Login.route) {
-//
-//                        }
+                        onSkipClicked()
                     },
                 textAlign = TextAlign.Center,
                 fontSize = 16.sp,
                 color = AppTheme.colors.colorBlack
             )
         else Spacer(modifier = Modifier.height(48.dp))
-
 
     }
 }
@@ -180,17 +177,16 @@ fun ItemGreeting(item: Triple<Int, String, String>) {
 
         Text(
             text = item.second,
-            fontSize = 24.sp,
-            color = AppTheme.colors.colorBlack
+            textAlign = TextAlign.Center,
+            style = AppTheme.typography.h1Bold28.copy(AppTheme.colors.colorBlack)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
             text = item.third,
-            fontSize = 16.sp,
+            style = AppTheme.typography.contentBlockText.copy(AppTheme.colors.colorShadowGrey),
             textAlign = TextAlign.Center,
-            color = AppTheme.colors.colorShadowGrey
         )
     }
 }
