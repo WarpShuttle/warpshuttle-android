@@ -1,5 +1,10 @@
 package com.android.warpshuttle.presentation.feature.authentication.screen
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,16 +21,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.android.warpshuttle.presentation.ui.component.WarpButton
 import com.android.warpshuttle.presentation.ui.component.WarpTextField
 import com.android.warpshuttle.presentation.ui.theme.AppTheme
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -33,6 +41,12 @@ fun LoginScreen(onLogInClicked: () -> Unit) {
     var textFieldValue by remember {
         mutableStateOf("")
     }
+
+    var buttonOffsetX by remember {
+        mutableStateOf(0f)
+    }
+
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -84,7 +98,7 @@ fun LoginScreen(onLogInClicked: () -> Unit) {
             WarpTextField(defaultValue = "",
                 placeholderText = "Enter your email",
                 placeHolderColor = AppTheme.colors.colorGray,
-                buttonOffsetX = 1.dp,
+                buttonOffsetX = buttonOffsetX.dp,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                 ),
@@ -100,7 +114,7 @@ fun LoginScreen(onLogInClicked: () -> Unit) {
             WarpTextField(defaultValue = "",
                 placeholderText = "Enter your password",
                 placeHolderColor = AppTheme.colors.colorGray,
-                buttonOffsetX = 1.dp,
+                buttonOffsetX = buttonOffsetX.dp,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                 ),
@@ -115,8 +129,23 @@ fun LoginScreen(onLogInClicked: () -> Unit) {
 
             WarpButton(
                 title = "Log In",
+                isValid = false,
                 modifier = Modifier.padding(top = AppTheme.dimens.dimens_20)
             ) {
+                if (!it) coroutineScope.launch {
+                    animate(
+                        initialValue = -5f, targetValue = 5f, animationSpec = repeatable(
+                            4,
+                            repeatMode = RepeatMode.Reverse,
+                            animation = tween(80, easing = LinearEasing)
+                        )
+                    ) { value, _ ->
+                        buttonOffsetX = value
+                    }
+                }
+                else {
+                    
+                }
             }
         }
     }

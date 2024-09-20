@@ -116,6 +116,7 @@ fun IntroScreen(getStartedClicked: () -> Unit, onSkipClicked: () -> Unit) {
 
         WarpButton(
             title = buttonName,
+            isValid = true,
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp)
                 .width(175.dp)

@@ -48,8 +48,9 @@ fun Modifier.bounceClickEffect() = composed {
 @Composable
 fun WarpButton(
     title: String,
+    isValid: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: (isValid : Boolean) -> Unit
 ) {
     val hapticFeedback = LocalHapticFeedback.current
 
@@ -62,7 +63,7 @@ fun WarpButton(
         colors = ButtonDefaults.textButtonColors(AppTheme.colors.colorBrightBlue),
         onClick = {
             hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-            onClick()
+            onClick(isValid)
         }) {
         Text(
             text = title,
