@@ -19,14 +19,13 @@ android {
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        getByName("debug") {
+            buildConfigField("Boolean", "DEBUG_MODE", "true")
+            buildConfigField("String", "BASE_URL", "\"https://idealofmed.stage.vantagebit.com/api/\"")
+            buildConfigField("String", "API_VERSION", "\"2.0.0\"")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,6 +35,8 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -74,6 +75,16 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.navigation.dynamic.features)
+
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.kotlin.coroutines)
+
+    implementation(libs.facebook.stetho)
+    implementation(libs.facebook.okhttp)
+
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.okhttp.logging.interceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
