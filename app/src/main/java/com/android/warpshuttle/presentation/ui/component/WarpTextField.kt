@@ -38,18 +38,13 @@ fun WarpTextField(
     buttonOffsetX: Dp,
     textLength: Int = Int.MAX_VALUE,
     keyboardOptions: KeyboardOptions,
-    onValueChanged: (String) -> Unit
+    onValueChange: (String) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
-    var nameFieldValue by remember { mutableStateOf(defaultValue) }
+
     TextField(
-        value = nameFieldValue,
-        onValueChange = {
-            if (it.length <= textLength) {
-                nameFieldValue = it
-                onValueChanged.invoke(it)
-            }
-        },
+        value = defaultValue,
+        onValueChange = onValueChange,
         modifier = modifier
             .fillMaxWidth()
             .offset(x = buttonOffsetX, y = 0.dp)

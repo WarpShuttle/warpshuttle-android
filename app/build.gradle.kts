@@ -21,7 +21,7 @@ android {
     buildTypes {
         getByName("debug") {
             buildConfigField("Boolean", "DEBUG_MODE", "true")
-            buildConfigField("String", "BASE_URL", "\"https://idealofmed.stage.vantagebit.com/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.2.131:8000\"")
             buildConfigField("String", "API_VERSION", "\"2.0.0\"")
         }
     }

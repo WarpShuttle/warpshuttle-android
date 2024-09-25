@@ -1,6 +1,6 @@
 package com.android.warpshuttle.data.network
 
-import com.facebook.stetho.BuildConfig
+import com.android.warpshuttle.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Protocol
@@ -31,7 +31,7 @@ class CustomInterceptor : Interceptor {
         } catch (e: UnknownHostException) {
             e.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("UnknownHostException").body(
                     "{\"key\":[\"Just Handling DNS exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -39,7 +39,7 @@ class CustomInterceptor : Interceptor {
         } catch (e1: SocketTimeoutException) {
             e1.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("SocketTimeoutException").body(
                     "{\"key\":[\"Just Handling SocketTimeOut exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -47,7 +47,7 @@ class CustomInterceptor : Interceptor {
         } catch (e2: SocketException) {
             e2.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("SocketException").body(
                     "{\"key\":[\"Just Handling Socket exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -55,7 +55,7 @@ class CustomInterceptor : Interceptor {
         } catch (e3 : SSLException){
             e3.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("SSLException").body(
                     "{\"key\":[\"Just Handling SSL exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -63,7 +63,7 @@ class CustomInterceptor : Interceptor {
         } catch (e4 : Exception){
             e4.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("Exception").body(
                     "{\"key\":[\"Just Handling Generic exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -71,7 +71,7 @@ class CustomInterceptor : Interceptor {
         }catch (e5 : IOException){
             e5.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("https://idealofmed.bonzun.com").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("IOException").body(
                     "{\"key\":[\"Just Handling IO exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -80,7 +80,7 @@ class CustomInterceptor : Interceptor {
         catch (e6 : SSLHandshakeException){
             e6.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("SSLHandshakeException").body(
                     "{\"key\":[\"Just Handling SSLHandshakeException exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())
@@ -89,7 +89,7 @@ class CustomInterceptor : Interceptor {
         catch (e7 : SSLProtocolException){
             e7.printStackTrace()
             Response.Builder()
-                .request(Request.Builder().url("http://127.0.0.1:8000/api/v1").build())
+                .request(Request.Builder().url("http://10.0.2.2:8000").build())
                 .protocol(Protocol.HTTP_2).message("SSLProtocolException").body(
                     "{\"key\":[\"Just Handling SSLProtocolException exception\"]}"
                         .toResponseBody("application/json".toMediaTypeOrNull())

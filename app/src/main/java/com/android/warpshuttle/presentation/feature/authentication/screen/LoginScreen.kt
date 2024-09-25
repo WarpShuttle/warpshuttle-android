@@ -19,6 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,13 +38,20 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(onLogInClicked: () -> Unit) {
-    var textFieldValue by remember {
-        mutableStateOf("")
+fun LoginScreen(
+    email: String,
+    password: String,
+    onEmailValueChange: (String) -> Unit,
+    onPasswordValueChange: (String) -> Unit,
+    onLogInClicked: () -> Unit
+) {
+
+    var emailOffsetX by remember {
+        mutableFloatStateOf(0f)
     }
 
-    var buttonOffsetX by remember {
-        mutableStateOf(0f)
+    var passwordOffsetX by remember {
+        mutableFloatStateOf(0f)
     }
 
     val coroutineScope = rememberCoroutineScope()
@@ -95,36 +103,45 @@ fun LoginScreen(onLogInClicked: () -> Unit) {
                 modifier = Modifier.padding(bottom = AppTheme.dimens.dimens_12)
             )
 
-            WarpTextField(defaultValue = "",
+            WarpTextField(
+                defaultValue = email,
                 placeholderText = "Enter your email",
                 placeHolderColor = AppTheme.colors.colorGray,
-                buttonOffsetX = buttonOffsetX.dp,
+                buttonOffsetX = emailOffsetX.dp,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                 ),
-                onValueChanged = { })
+                onValueChange = onEmailValueChange
+            )
 
             Text(
                 text = "Password",
                 textAlign = TextAlign.Start,
                 style = AppTheme.typography.captionRegular.copy(color = AppTheme.colors.colorGray),
-                modifier = Modifier.padding(top = AppTheme.dimens.dimens_26,bottom = AppTheme.dimens.dimens_12)
+                modifier = Modifier.padding(
+                    top = AppTheme.dimens.dimens_26,
+                    bottom = AppTheme.dimens.dimens_12
+                )
             )
 
-            WarpTextField(defaultValue = "",
+            WarpTextField(
+                defaultValue = password,
                 placeholderText = "Enter your password",
                 placeHolderColor = AppTheme.colors.colorGray,
-                buttonOffsetX = buttonOffsetX.dp,
+                buttonOffsetX = passwordOffsetX.dp,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                 ),
-                onValueChanged = { })
+                onValueChange = onPasswordValueChange
+            )
 
             Text(
                 text = "Forgot password?",
                 textAlign = TextAlign.End,
                 style = AppTheme.typography.subtitle1.copy(color = AppTheme.colors.colorGray),
-                modifier = Modifier.fillMaxWidth().padding(top = AppTheme.dimens.dimens_20,bottom = AppTheme.dimens.dimens_12)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = AppTheme.dimens.dimens_20, bottom = AppTheme.dimens.dimens_12)
             )
 
             WarpButton(
@@ -132,19 +149,36 @@ fun LoginScreen(onLogInClicked: () -> Unit) {
                 isValid = false,
                 modifier = Modifier.padding(top = AppTheme.dimens.dimens_20)
             ) {
-                if (!it) coroutineScope.launch {
-                    animate(
-                        initialValue = -5f, targetValue = 5f, animationSpec = repeatable(
-                            4,
-                            repeatMode = RepeatMode.Reverse,
-                            animation = tween(80, easing = LinearEasing)
-                        )
-                    ) { value, _ ->
-                        buttonOffsetX = value
+                if (email.isEmpty()) {
+                    coroutineScope.launch {
+                        animate(
+                            initialValue = -5f,
+                            targetValue = 5f,
+                            animationSpec = repeatable(
+                                4,
+                                repeatMode = RepeatMode.Reverse,
+                                animation = tween(80, easing = LinearEasing)
+                            )
+                        ) { value, _ ->
+                            emailOffsetX = value
+                        }
                     }
-                }
-                else {
-                    
+                } else if (password.isEmpty()) {
+                    coroutineScope.launch {
+                        animate(
+                            initialValue = -5f,
+                            targetValue = 5f,
+                            animationSpec = repeatable(
+                                4,
+                                repeatMode = RepeatMode.Reverse,
+                                animation = tween(80, easing = LinearEasing)
+                            )
+                        ) { value, _ ->
+                            passwordOffsetX = value
+                        }
+                    }
+                } else {
+                    onLogInClicked()
                 }
             }
         }
