@@ -33,6 +33,7 @@ class AppColors(
     val colorGray = Color(0xFF858597)
     val colorLightGray = Color (0xFFF4F3FD)
     val colorButtonGray = Color (0xFFB8B8D2)
+    val colorCardBlockGray = Color (0xFFFAF8FB)
 
     fun copy(
         primary: Color = this.primary,
@@ -75,6 +76,7 @@ val ColorGray = Color(0xFF858597)
 val ColorLightGray = Color (0XFFF4F3FD)
 
 val ColorButtonGray = Color (0xFFB8B8D2)
+val ColorCardBlockGray = Color (0xFFFAF8FB)
 
 private val colorLightPrimary = ColorBrightBlue
 private val colorLightSecondary = ColorDeepBlue

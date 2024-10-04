@@ -21,7 +21,7 @@ android {
     buildTypes {
         getByName("debug") {
             buildConfigField("Boolean", "DEBUG_MODE", "true")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.2.131:8000\"")
+            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/api/v1/\"")
             buildConfigField("String", "API_VERSION", "\"2.0.0\"")
         }
     }
@@ -85,6 +85,9 @@ dependencies {
 
     implementation(libs.squareup.okhttp)
     implementation(libs.squareup.okhttp.logging.interceptor)
+    implementation(libs.androidx.constraintlayout.compose.android)
+
+    implementation(libs.io.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

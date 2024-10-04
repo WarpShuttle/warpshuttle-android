@@ -6,6 +6,7 @@
         <item name="postSplashScreenTheme">@style/Theme.SplashScreen</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">#2222FB</item>
     </style>
 
 </resources>

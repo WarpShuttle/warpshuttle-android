@@ -1,6 +1,7 @@
 package com.android.warpshuttle.app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -13,14 +14,21 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.android.warpshuttle.data.network.RemoteDataService
 import com.android.warpshuttle.data.repository.UserRepository
+import com.android.warpshuttle.navigation.NavigationItem
 import com.android.warpshuttle.navigation.Screen
 import com.android.warpshuttle.navigation.customAnimatedComposable
 import com.android.warpshuttle.navigation.rememberCustomAnimatedNavController
 import com.android.warpshuttle.presentation.feature.authentication.screen.LoginScreen
 import com.android.warpshuttle.presentation.feature.authentication.viewmodel.LoginViewModel
+import com.android.warpshuttle.presentation.feature.dashboard.screen.AlertScreen
+import com.android.warpshuttle.presentation.feature.dashboard.screen.BlogScreen
 import com.android.warpshuttle.presentation.feature.dashboard.screen.DashboardScreen
+import com.android.warpshuttle.presentation.feature.dashboard.screen.HomeScreen
+import com.android.warpshuttle.presentation.feature.dashboard.screen.ProfileScreen
+import com.android.warpshuttle.presentation.feature.dashboard.screen.TeamScreen
 import com.android.warpshuttle.presentation.feature.intro.screen.IntroScreen
 import com.android.warpshuttle.presentation.feature.intro.viewmodel.IntroViewModel
 import com.android.warpshuttle.presentation.feature.splashscreen.SplashScreen
@@ -123,6 +131,7 @@ class MainActivity : AppCompatActivity() {
             customAnimatedComposable(route = Screen.Dashboard.route) {
                 DashboardScreen()
             }
+
         }
     }
 
@@ -141,6 +150,7 @@ class MainActivity : AppCompatActivity() {
             email,
             password
         ).observe(this) { responseEvent ->
+            Log.i("Response", responseEvent.toString())
             when {
                 responseEvent.isLoading -> {}
 

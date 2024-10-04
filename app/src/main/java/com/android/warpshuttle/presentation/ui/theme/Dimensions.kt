@@ -19,7 +19,8 @@ class Dimensions(
     val dimens_90: Dp,
     val dimens_100: Dp,
     val dimens_120: Dp,
-    val dimens_160: Dp
+    val dimens_160: Dp,
+    val dimens_180:Dp
 )
 
 val smallDimension = Dimensions(
@@ -36,6 +37,7 @@ val smallDimension = Dimensions(
     dimens_100 = 85.dp,
     dimens_120 = 0.dp,
     dimens_160 = 140.dp,
+    dimens_180 = 160.dp
 )
 
 val sw420Dimension = Dimensions(
@@ -51,7 +53,8 @@ val sw420Dimension = Dimensions(
     dimens_90 = 90.dp,
     dimens_100 = 100.dp,
     dimens_120 = 120.dp,
-    dimens_160 = 160.dp
+    dimens_160 = 160.dp,
+    dimens_180 = 180.dp
 )
 
 val textSmallDimension = AppTypography(

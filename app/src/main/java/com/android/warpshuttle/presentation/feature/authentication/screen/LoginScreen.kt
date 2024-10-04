@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,21 +19,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.android.warpshuttle.presentation.ui.component.WarpButton
-import com.android.warpshuttle.presentation.ui.component.WarpTextField
+import com.android.warpshuttle.presentation.ui.component.ComponentClass
 import com.android.warpshuttle.presentation.ui.theme.AppTheme
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -103,7 +98,7 @@ fun LoginScreen(
                 modifier = Modifier.padding(bottom = AppTheme.dimens.dimens_12)
             )
 
-            WarpTextField(
+            ComponentClass.WarpTextField(
                 defaultValue = email,
                 placeholderText = "Enter your email",
                 placeHolderColor = AppTheme.colors.colorGray,
@@ -124,7 +119,7 @@ fun LoginScreen(
                 )
             )
 
-            WarpTextField(
+            ComponentClass.WarpTextField(
                 defaultValue = password,
                 placeholderText = "Enter your password",
                 placeHolderColor = AppTheme.colors.colorGray,
@@ -144,9 +139,10 @@ fun LoginScreen(
                     .padding(top = AppTheme.dimens.dimens_20, bottom = AppTheme.dimens.dimens_12)
             )
 
-            WarpButton(
+            ComponentClass.WarpButton(
                 title = "Log In",
                 isValid = false,
+                type = "bluishType",
                 modifier = Modifier.padding(top = AppTheme.dimens.dimens_20)
             ) {
                 if (email.isEmpty()) {
@@ -181,6 +177,7 @@ fun LoginScreen(
                     onLogInClicked()
                 }
             }
+
         }
     }
 }

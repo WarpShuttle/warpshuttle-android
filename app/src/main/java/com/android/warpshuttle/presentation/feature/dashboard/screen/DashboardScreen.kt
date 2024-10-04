@@ -1,5 +1,6 @@
 package com.android.warpshuttle.presentation.feature.dashboard.screen
 
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -19,23 +20,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.android.warpshuttle.presentation.feature.dashboard.NavigationItem
+import com.android.warpshuttle.navigation.Screen
+import com.android.warpshuttle.navigation.customAnimatedComposable
 import com.android.warpshuttle.presentation.ui.theme.AppTheme
-
-@Composable
-fun TopBar() {
-    TopAppBar(
-        title = { Text(text = "AppName", fontSize = 18.sp) },
-        backgroundColor = Color.Yellow,
-        contentColor = Color.White
-    )
-}
 
 @Composable
 fun DashboardScreen() {
@@ -54,12 +47,43 @@ fun DashboardScreen() {
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun Navigation(navController: NavHostController) {
+    NavHost(navController, startDestination = Screen.Home.route) {
+        composable(Screen.Home.route) {
+            HomeScreen {
+                navController.navigate(Screen.Profile.route)
+            }
+        }
+        composable(Screen.Team.route) {
+            TeamScreen()
+        }
+
+        composable(Screen.Search.route) {
+            SearchScreen()
+        }
+
+        composable(Screen.Blog.route) {
+            BlogScreen()
+        }
+
+        composable(Screen.Alert.route) {
+            AlertScreen()
+        }
+
+        customAnimatedComposable (route = Screen.Profile.route){
+            ProfileScreen()
+        }
+    }
+}
+
+@Composable
+fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
-        NavigationItem.Home,
-        NavigationItem.Team,
-        NavigationItem.Blog,
-        NavigationItem.Alert
+        Screen.Home,
+        Screen.Team,
+        Screen.Search,
+        Screen.Blog,
+        Screen.Alert
     )
 
     Surface(
@@ -111,20 +135,3 @@ fun BottomNavigationBar(navController: NavController) {
 
 }
 
-@Composable
-fun Navigation(navController: NavHostController) {
-    NavHost(navController, startDestination = NavigationItem.Home.route) {
-        composable(NavigationItem.Home.route) {
-            HomeScreen()
-        }
-        composable(NavigationItem.Team.route) {
-            TeamScreen()
-        }
-        composable(NavigationItem.Blog.route) {
-            BlogScreen()
-        }
-        composable(NavigationItem.Alert.route) {
-            AlertScreen()
-        }
-    }
-}

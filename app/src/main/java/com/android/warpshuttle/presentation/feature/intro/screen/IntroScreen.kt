@@ -40,7 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.warpshuttle.R
-import com.android.warpshuttle.presentation.ui.component.WarpButton
+import com.android.warpshuttle.presentation.ui.component.ComponentClass
 import com.android.warpshuttle.presentation.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 
@@ -114,9 +114,10 @@ fun IntroScreen(getStartedClicked: () -> Unit, onSkipClicked: () -> Unit) {
 
         Spacer(modifier = Modifier.height(64.dp))
 
-        WarpButton(
+        ComponentClass.WarpButton(
             title = buttonName,
             isValid = true,
+            type = "bluishType",
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp)
                 .width(175.dp)
