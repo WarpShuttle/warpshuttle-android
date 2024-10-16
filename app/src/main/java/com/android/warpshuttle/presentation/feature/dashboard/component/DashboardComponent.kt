@@ -1,8 +1,10 @@
 package com.android.warpshuttle.presentation.feature.dashboard.component
 
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,12 +15,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -35,9 +42,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import com.android.warpshuttle.R
+import com.android.warpshuttle.data.enums.ViewType
 import com.android.warpshuttle.presentation.ui.component.ComponentClass
 import com.android.warpshuttle.presentation.ui.theme.AppTheme
 
@@ -169,7 +174,7 @@ object DashboardComponent {
                 ComponentClass.WarpButton(
                     modifier = Modifier.padding(
                         bottom = AppTheme.dimens.dimens_12
-                    ), title = "Submit", type = "bluishType",isValid = true
+                    ), title = "Submit", type = "bluishType", isValid = true
                 ) {
                     onSend(imageUri, description)
                     onDismiss()
@@ -179,23 +184,125 @@ object DashboardComponent {
     }
 
     @Composable
-    fun ProfileView(modifier : Modifier, data:Any?) {
+    fun ProfileView(modifier: Modifier, data: Any?, viewType: String?) {
         Column {
             ComponentClass.ImageItem(
                 modifier = modifier
                     .fillMaxSize()
-                    .weight(0.35f),
+                    .weight(if (viewType.equals(ViewType.TEAMVIEW.type)) 0.65f else 0.35f),
                 data = data,
                 contentScale = ContentScale.Crop
             )
 
-            Column( modifier = Modifier
-                .fillMaxSize()
-                .weight(0.65f)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(if (viewType.equals(ViewType.TEAMVIEW.type)) 0.35f else 0.65f),
+            ) {
+                Text(
+                    text = "ANDROID DEVELOPER",
+                    textAlign = TextAlign.Center,
+                    style = AppTheme.typography.body1.copy(color = AppTheme.colors.colorGray),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = AppTheme.dimens.dimens_20)
+                )
 
-                Text(text = "ANDROID DEVELOPER")
-                Text(text = "Ronit Prajapati")
+                Text(
+                    text = "Ronit Prajapati",
+                    textAlign = TextAlign.Center,
+                    style = AppTheme.typography.contentBlockSubHeader.copy(color = AppTheme.colors.colorBlack),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = AppTheme.dimens.dimens_12)
+                )
 
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = AppTheme.dimens.dimens_12),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    IconButton(
+                        onClick = {},
+                        modifier = Modifier
+                            .padding(6.dp)
+                            .background(AppTheme.colors.colorLightGray, CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.AccountBox,
+                            tint = AppTheme.colors.colorBrightBlue,
+                            contentDescription = "uploadImage",
+                            modifier = Modifier
+                        )
+                    }
+                    IconButton(
+                        onClick = {},
+                        modifier = Modifier
+                            .padding(6.dp)
+                            .background(AppTheme.colors.colorLightGray, CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Call,
+                            tint = AppTheme.colors.colorBrightBlue,
+                            contentDescription = "uploadImage",
+                            modifier = Modifier
+                        )
+                    }
+                    IconButton(
+                        onClick = {},
+                        modifier = Modifier
+                            .padding(6.dp)
+                            .background(AppTheme.colors.colorLightGray, CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            tint = AppTheme.colors.colorBrightBlue,
+                            contentDescription = "uploadImage",
+                            modifier = Modifier
+                        )
+                    }
+                    IconButton(
+                        onClick = {},
+                        modifier = Modifier
+                            .padding(6.dp)
+                            .background(AppTheme.colors.colorLightGray, CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Share,
+                            tint = AppTheme.colors.colorBrightBlue,
+                            contentDescription = "uploadImage",
+                            modifier = Modifier
+                        )
+                    }
+                }
+
+                if (viewType == ViewType.PROFILEVIEW.type) {
+                    Column(
+                        modifier = Modifier.padding(
+                            horizontal = AppTheme.dimens.dimens_12,
+                            vertical = AppTheme.dimens.dimens_12
+                        )
+                    ) {
+                        ComponentClass.WarpButton(
+                            title = "Edit Profile",
+                            isValid = true,
+                            type = "bluishType",
+                            modifier = Modifier.padding(vertical = AppTheme.dimens.dimens_12)
+                        ) {
+
+                        }
+
+                        ComponentClass.WarpButton(
+                            title = "Change Password",
+                            isValid = true,
+                            type = "",
+                            modifier = Modifier.padding(vertical = AppTheme.dimens.dimens_12)
+                        ) {
+
+                        }
+                    }
+                }
             }
         }
     }

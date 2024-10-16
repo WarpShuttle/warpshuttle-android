@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -38,7 +39,7 @@ fun BlogScreen() {
     Scaffold(
         containerColor = AppTheme.colors.colorWhite,
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = AppTheme.colors.colorWhite,
                     titleContentColor = AppTheme.colors.colorBlack,
@@ -48,9 +49,10 @@ fun BlogScreen() {
                         text = "Blogs",
                         textAlign = TextAlign.Center,
                         style = AppTheme.typography.h3.copy(color = AppTheme.colors.colorBlack),
-                        modifier = Modifier
-                            .fillMaxWidth()
                     )
+                },
+                actions = {
+
                 },
             )
         },
